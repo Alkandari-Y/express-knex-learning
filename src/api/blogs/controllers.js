@@ -1,7 +1,7 @@
 const BlogService = require("../../services/blogServices");
 
 exports.blogIdParamHandler = async (req, res, next, blogId) => {
-  const foundBlog = await BlogService.getBlogWhere({ by: blogId });
+  const foundBlog = await BlogService.getBlog({ id: blogId });
   if (!foundBlog) {
     return res
       .status(404)
@@ -23,8 +23,10 @@ exports.getAllBlogs = async (req, res, next) => {
 
 exports.createBlog = async (req, res, next) => {
   try {
-    req.body.author_id = req.session.user.id;
-    const newBLog = await BlogService.createBlog(req.body);
+    const newBLog = await BlogService.createBlog({
+      ...req.body,
+      author_id: req.session.user.id,
+    });
     return res.status(201).json(newBLog);
   } catch (error) {
     return next(error);
@@ -41,10 +43,12 @@ exports.getBlogById = async (req, res, next) => {
 
 exports.updateBlogById = async (req, res, next) => {
   try {
-    const updatedBlog = await BlogService.updateBlogWhere({
-      data: req.body,
-      by: req.blog.id,
-    });
+    const updatedBlog = await BlogService.updateBlog(
+      {
+        id: req.blog.id,
+      },
+      req.body
+    );
     return res.status(202).json(updatedBlog);
   } catch (error) {
     return next(error);
@@ -53,9 +57,27 @@ exports.updateBlogById = async (req, res, next) => {
 
 exports.deleteBlogById = async (req, res, next) => {
   try {
-    await BlogService.deleteBlogWhere({ by: req.blog.id });
-    return res.status(204).end();
+    await BlogService.deleteBlog({ id: req.blog.id });
+    return res.sendStatus(204);
   } catch (error) {
     return next(error);
   }
 };
+
+exports.getBlogsByCurrentUser = async (req, res, next) => {
+  try {
+    const blogs = await BlogService.getBlogsByAuthor(req.session.user.id);
+    return res.json(blogs);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+exports.getAllAuthors = async (req, res, next) => {
+  try {
+    const authors = await BlogService.getAllAuthors();
+    return res.json(authors)
+  } catch (error) {
+    return next(error);
+  }
+} 

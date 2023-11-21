@@ -13,8 +13,13 @@ class BaseModel {
     return query;
   }
 
-  static async findOne({ by, column = "id" }) {
-    const query = await this.table.where(column, by).first();
+  static async findOne(searchParams) {
+    const query = await this.table.where(searchParams).first();
+    return query;
+  }
+
+  static async find(searchParams) {
+    const query = await this.table.where(searchParams);
     return query;
   }
 
@@ -23,17 +28,17 @@ class BaseModel {
     return query;
   }
 
-  static async updateOne({ by, data, column = "id" }) {
+  static async updateOne(searchParams, data) {
     const query = await this.table
       .update(data)
-      .where(column, by)
+      .where(searchParams)
       .returning("*");
 
     return query;
   }
 
-  static async deleteOne({ by, column = "id" }) {
-    const query = await this.table.del().where(column, by);
+  static async deleteOne(searchParams) {
+    const query = await this.table.del().where(searchParams);
 
     return query;
   }

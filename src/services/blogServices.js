@@ -12,19 +12,29 @@ class BlogService {
         return blogs;
     }
 
-    static async getBlogWhere(queryBy) {
-        const blogs = await Blog.findOne(queryBy);
+    static async getBlog(searchParams) {
+        const blogs = await Blog.findOne(searchParams);
         return blogs; 
     }
 
-    static async updateBlogWhere(queryBy) {
-        const blog = await Blog.updateOne(queryBy);
+    static async updateBlog(searchParams, data) {
+        const blog = await Blog.updateOne(searchParams, data);
         return blog;
     }
 
-    static async deleteBlogWhere(queryBy) {
-        const blog = await Blog.deleteOne(queryBy);
+    static async deleteBlog(searchParams) {
+        const blog = await Blog.deleteOne(searchParams);
         return blog;
+    }
+
+    static async getBlogsByAuthor(author) {
+        const blogs = await Blog.find({author_id: author})
+        return blogs
+    }
+
+    static async getAllAuthors() {
+        const authors = await Blog.findAllAuthors();
+        return authors;
     }
 
 }
