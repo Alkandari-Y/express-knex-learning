@@ -3,8 +3,8 @@ const BaseModel = require("./base");
 class Blog extends BaseModel {
   static tableName = "blog";
 
-  static async findAllAuthors() {
-    const authors = await this.table
+  static findAllAuthors() {
+    const authors = this.table
       .select(
         "user.username",
         "blog.author_id",
@@ -16,7 +16,7 @@ class Blog extends BaseModel {
         // ref: https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_json-arrayagg
         // ref: https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html#function_json-objectagg
         this._db.raw(
-          "json_agg(json_build_object('id', blog.id, 'title', blog.title, 'content', blog.content, 'published', blog.published)) as blogs"
+          "JSON_AGG(JSON_BUILD_OBJECT('id', blog.id, 'title', blog.title, 'content', blog.content, 'published', blog.published)) as blogs"
         )
       )
       .count("blog.author_id") // added a count for the sake of it, and just to see how I can add it
@@ -25,6 +25,20 @@ class Blog extends BaseModel {
       .groupBy("blog.author_id", "user.id"); // group by will in the case of joins requires the same fields mentioned in the join to work properly
 
     return authors;
+  }
+
+  static findOneSelectComments(blogId) {
+    const query = this.table
+      .select(
+        "blog.*",
+        this._db.raw(
+          "JSON_AGG(JSON_BUILD_OBJECT('id', comment.id, 'text', comment.text, 'user', comment.user_id, 'created_at', comment.created_at)) as comments"
+        )
+      )
+      .leftJoin("comment", "blog.id", "comment.blog_id")
+      .where("blog.id", blogId)
+      .groupBy("blog.id", "comment.blog_id");
+    return query;
   }
 }
 

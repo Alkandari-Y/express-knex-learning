@@ -7,11 +7,15 @@ router.param("blogId", controllers.blogIdParamHandler);
 
 router.get("/", controllers.getAllBlogs);
 router.post("/", isSessionAuthenticated, controllers.createBlog);
-router.get('/authors', controllers.getAllAuthors);
+router.get("/authors", controllers.getAllAuthors);
 router.get("/my-blogs", controllers.getBlogsByCurrentUser);
-router.route("/detail/:blogId")
+router
+  .route("/detail/:blogId")
   .get(controllers.getBlogById)
   .put(isSessionAuthenticated, isAuthor, controllers.updateBlogById)
   .delete(isSessionAuthenticated, isAuthor, controllers.deleteBlogById);
+router
+  .route("/comment/:blogId")
+  .post(isSessionAuthenticated, controllers.postComment);
 
 module.exports = router;

@@ -11,7 +11,6 @@ exports.seed = async function (knex) {
   const users = Array(10)
     .fill(null)
     .map((_, index) => ({
-      id: index + 1,
       email: `testuser${index + 1}@mail.com`,
       username: `testuser${index + 1}`,
     }));

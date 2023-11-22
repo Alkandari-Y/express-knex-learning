@@ -1,4 +1,5 @@
 const BlogService = require("../../services/blogServices");
+const CommentService = require("../../services/commentService");
 
 exports.blogIdParamHandler = async (req, res, next, blogId) => {
   const foundBlog = await BlogService.getBlog({ id: blogId });
@@ -14,7 +15,6 @@ exports.blogIdParamHandler = async (req, res, next, blogId) => {
 
 exports.getAllBlogs = async (req, res, next) => {
   try {
-    console.log(res.session)
     const data = await BlogService.getAllBlogs();
     return res.json(data);
   } catch (error) {
@@ -36,8 +36,10 @@ exports.createBlog = async (req, res, next) => {
 
 exports.getBlogById = async (req, res, next) => {
   try {
-    return res.json(req.blog);
+    const blog = await BlogService.getBlogAndComments(req.blog.id);
+    return res.json(blog);
   } catch (error) {
+    console.log(error);
     return next(error);
   }
 };
@@ -77,8 +79,23 @@ exports.getBlogsByCurrentUser = async (req, res, next) => {
 exports.getAllAuthors = async (req, res, next) => {
   try {
     const authors = await BlogService.getAllAuthors();
-    return res.json(authors)
+    return res.json(authors);
   } catch (error) {
     return next(error);
   }
-} 
+};
+
+exports.postComment = async (req, res, next) => {
+  try {
+    const { id: blog_id } = req.blog;
+    const { id: user_id } = req.session.user;
+    const comment = await CommentService.postComment({
+      ...req.body,
+      user_id,
+      blog_id,
+    });
+    return res.status(201).json(comment);
+  } catch (error) {
+    return next(error);
+  }
+};

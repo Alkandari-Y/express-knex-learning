@@ -2,7 +2,7 @@ const Blog = require("../models/Blog");
 
 class BlogService {
   static async createBlog(data) {
-    const newBlog = await Blog.create(data);
+    const [newBlog] = await Blog.create(data);
 
     return newBlog;
   }
@@ -15,6 +15,11 @@ class BlogService {
   static async getBlog(searchParams) {
     const blogs = await Blog.findOne(searchParams);
     return blogs;
+  }
+
+  static async getBlogAndComments(blogId) {
+    const blog = await Blog.findOneSelectComments(blogId)
+    return blog;
   }
 
   static async updateBlog(searchParams, data) {
