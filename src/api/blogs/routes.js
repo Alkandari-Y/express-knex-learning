@@ -9,7 +9,7 @@ router.get("/", controllers.getAllBlogs);
 router.post("/", isSessionAuthenticated, controllers.createBlog);
 router.get('/authors', controllers.getAllAuthors);
 router.get("/my-blogs", controllers.getBlogsByCurrentUser);
-router.route("/:blogId")
+router.route("/detail/:blogId")
   .get(controllers.getBlogById)
   .put(isSessionAuthenticated, isAuthor, controllers.updateBlogById)
   .delete(isSessionAuthenticated, isAuthor, controllers.deleteBlogById);

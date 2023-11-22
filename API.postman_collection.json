@@ -46,7 +46,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"shereen\",\r\n    \"password\": \"P@ssw0rd\"\r\n}",
+							"raw": "{\r\n    \"username\": \"testuser1\",\r\n    \"password\": \"P@ssw0rd\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -76,7 +76,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"testuse2\",\r\n    \"password\": \"P@ssw0rd\",\r\n    \"email\": \"testuse2@mail.com\"\r\n}",
+							"raw": "{\r\n    \"username\": \"testuser\",\r\n    \"password\": \"P@ssw0rd\",\r\n    \"email\": \"testuser3@mail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -218,13 +218,45 @@
 					"response": []
 				},
 				{
+					"name": "My Blogs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"SECTION 1\",\r\n    \"content\": \"knex update works and returns\",\r\n    \"published\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/blogs/my-blogs",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"blogs",
+								"my-blogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Create Blog",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Test\",\r\n    \"content\": \"knex update works and returns\",\r\n    \"published\": 0\r\n}",
+							"raw": "{\r\n    \"title\": \"Draft 1\",\r\n    \"content\": \"knex update works and returns\",\r\n    \"published\": 0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -263,7 +295,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/blogs/9",
+							"raw": "localhost:8000/api/blogs/detail/9",
 							"host": [
 								"localhost"
 							],
@@ -271,39 +303,8 @@
 							"path": [
 								"api",
 								"blogs",
+								"detail",
 								"9"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "My Blogs",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"SECTION 1\",\r\n    \"content\": \"knex update works and returns\",\r\n    \"published\": 0\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8000/api/blogs/my-blogs",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"blogs",
-								"my-blogs"
 							]
 						}
 					},
@@ -316,7 +317,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"published\": 1\r\n}",
+							"raw": "{\r\n    \"published\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -324,7 +325,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/blogs/4",
+							"raw": "localhost:8000/api/blogs/detail/2",
 							"host": [
 								"localhost"
 							],
@@ -332,7 +333,8 @@
 							"path": [
 								"api",
 								"blogs",
-								"4"
+								"detail",
+								"2"
 							]
 						}
 					},
@@ -353,7 +355,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/blogs/4",
+							"raw": "localhost:8000/api/blogs/detail/4",
 							"host": [
 								"localhost"
 							],
@@ -361,6 +363,7 @@
 							"path": [
 								"api",
 								"blogs",
+								"detail",
 								"4"
 							]
 						}

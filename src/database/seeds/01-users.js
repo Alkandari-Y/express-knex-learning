@@ -5,7 +5,7 @@ const bcryptHash = require("../../utils/auth/bcryptHash");
  */
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
-  await knex("users").del();
+  await knex("user").del();
 
   const hashed_password = await bcryptHash("P@ssw0rd");
   const users = Array(10)
@@ -16,7 +16,7 @@ exports.seed = async function (knex) {
       username: `testuser${index + 1}`,
     }));
 
-  await knex("users").insert(
+  await knex("user").insert(
     users.map((user) => ({ ...user, password: hashed_password }))
   );
 };

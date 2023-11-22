@@ -14,6 +14,7 @@ exports.blogIdParamHandler = async (req, res, next, blogId) => {
 
 exports.getAllBlogs = async (req, res, next) => {
   try {
+    console.log(res.session)
     const data = await BlogService.getAllBlogs();
     return res.json(data);
   } catch (error) {
