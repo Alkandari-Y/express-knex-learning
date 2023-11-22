@@ -99,3 +99,14 @@ exports.postComment = async (req, res, next) => {
     return next(error);
   }
 };
+
+exports.getAllCommentsByBlog = async (req, res, next) => {
+  try {
+    const comments = await CommentService.findCommentsByBlog({
+      blog_id: req.blog.id,
+    });
+    return res.json(comments);
+  } catch (error) {
+    return next(error);
+  }
+};

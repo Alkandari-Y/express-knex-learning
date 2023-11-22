@@ -9,6 +9,7 @@ router.get("/", controllers.getAllBlogs);
 router.post("/", isSessionAuthenticated, controllers.createBlog);
 router.get("/authors", controllers.getAllAuthors);
 router.get("/my-blogs", controllers.getBlogsByCurrentUser);
+router.get("/detail/:blogId/comments", controllers.getAllCommentsByBlog);
 router
   .route("/detail/:blogId")
   .get(controllers.getBlogById)

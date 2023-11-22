@@ -18,7 +18,7 @@ class BlogService {
   }
 
   static async getBlogAndComments(blogId) {
-    const blog = await Blog.findOneSelectComments(blogId)
+    const blog = await Blog.findOneSelectComments(blogId);
     return blog;
   }
 
