@@ -3,4 +3,5 @@ module.exports = {
   database: require("./databaseConfig"),
   jwt: require("./jwtConfig"),
   session: require("./sessionConfig"),
+  redis: require("./redisConfig"),
 };
