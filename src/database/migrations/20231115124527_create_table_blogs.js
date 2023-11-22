@@ -15,9 +15,9 @@ exports.up = async (knex) => {
     table.string("title").notNullable();
     table.text("content").notNullable();
     table.boolean("published").defaultTo(false);
-    table.date("published_at").nullable();
-    table.integer('author_id').notNullable();
-    table.foreign('author_id').references('id').inTable('users')
+    table.date("published_at", { useTz: true }).nullable();
+    table.integer("author_id").notNullable();
+    table.foreign("author_id").references("id").inTable("users");
     table.timestamps(true, true);
   });
 };
