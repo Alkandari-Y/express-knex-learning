@@ -1,35 +1,33 @@
 const { connection, migrations, seeds } = require("./src/config").database;
 
 module.exports = {
-
   development: {
-    client: 'sqlite3',
+    client: "sqlite3",
     connection: {
-      filename: './dev.sqlite3'
+      filename: "./dev.sqlite3",
     },
-    migrations
+    migrations,
   },
 
   staging: {
-    client: 'postgresql',
+    client: "postgresql",
     pool: {
       min: 2,
-      max: 10
+      max: 10,
     },
     connection,
     migrations,
-    seeds
+    seeds,
   },
 
   production: {
-    client: 'postgresql',
+    client: "postgresql",
     pool: {
       min: 2,
-      max: 10
+      max: 10,
     },
     connection,
     migrations,
-    seeds
-  }
-
+    seeds,
+  },
 };

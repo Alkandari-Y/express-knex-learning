@@ -22,7 +22,7 @@ class Blog extends BaseModel {
       .count("blogs.author_id") // added a count for the sake of it, and just to see how I can add it
       .leftJoin("users", "users.id", "blogs.author_id")
       .where("blogs.published", true) // can filter if needed to published articles only
-      .groupBy("blogs.author_id", "users.id") // group by will in the case of joins requires the same fields mentioned in the join to work properly
+      .groupBy("blogs.author_id", "users.id"); // group by will in the case of joins requires the same fields mentioned in the join to work properly
 
     return authors;
   }
