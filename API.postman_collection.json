@@ -295,7 +295,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/blogs/detail/9",
+							"raw": "localhost:8000/api/blogs/detail/2",
 							"host": [
 								"localhost"
 							],
@@ -304,7 +304,7 @@
 								"api",
 								"blogs",
 								"detail",
-								"9"
+								"2"
 							]
 						}
 					},
@@ -325,7 +325,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/blogs/detail/2",
+							"raw": "localhost:8000/api/blogs/detail/10",
 							"host": [
 								"localhost"
 							],
@@ -334,36 +334,6 @@
 								"api",
 								"blogs",
 								"detail",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Comment on Blog",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"text\": \"this blog is awesome\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8000/api/blogs/comment/10",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"blogs",
-								"comment",
 								"10"
 							]
 						}
@@ -395,6 +365,70 @@
 								"blogs",
 								"detail",
 								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comment on Blog",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"fixed routes\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/blogs/detail/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"blogs",
+								"detail",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Comments By Blog",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"SECTION 1\",\r\n    \"content\": \"knex update works and returns\",\r\n    \"published\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/blogs/detail/2/comments",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"blogs",
+								"detail",
+								"2",
+								"comments"
 							]
 						}
 					},

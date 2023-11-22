@@ -14,9 +14,7 @@ router
   .route("/detail/:blogId")
   .get(controllers.getBlogById)
   .put(isSessionAuthenticated, isAuthor, controllers.updateBlogById)
-  .delete(isSessionAuthenticated, isAuthor, controllers.deleteBlogById);
-router
-  .route("/comment/:blogId")
+  .delete(isSessionAuthenticated, isAuthor, controllers.deleteBlogById)
   .post(isSessionAuthenticated, controllers.postComment);
 
 module.exports = router;
