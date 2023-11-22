@@ -46,7 +46,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"testuser1\",\r\n    \"password\": \"P@ssw0rd\"\r\n}",
+							"raw": "{\r\n    \"username\": \"testuser2\",\r\n    \"password\": \"P@ssw0rd\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -76,7 +76,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"testuser\",\r\n    \"password\": \"P@ssw0rd\",\r\n    \"email\": \"testuser3@mail.com\"\r\n}",
+							"raw": "{\r\n    \"username\": \"testuser11\",\r\n    \"password\": \"P@ssw0rd\",\r\n    \"email\": \"testuser11@mail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -256,7 +256,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Draft 1\",\r\n    \"content\": \"knex update works and returns\",\r\n    \"published\": 0\r\n}",
+							"raw": "{\r\n    \"title\": \"Manifesto\",\r\n    \"content\": \"refactoring sucks\",\r\n    \"published\": 0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -335,6 +335,36 @@
 								"blogs",
 								"detail",
 								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comment on Blog",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"this blog is awesome\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/blogs/comment/10",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"blogs",
+								"comment",
+								"10"
 							]
 						}
 					},
