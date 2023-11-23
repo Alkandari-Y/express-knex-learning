@@ -40,6 +40,25 @@ class Blog extends BaseModel {
       .groupBy("blog.id", "comment.blog_id");
     return query;
   }
+
+  static findBlogSelectDetails(blogId) {
+    const query = this.table
+      .select(
+        "blog.*",
+        this._db.raw(
+          "JSON_BUILD_OBJECT('id', public.user.id, 'username', public.user.username) as author"
+        ),
+        this._db.raw(
+          "JSON_AGG(JSON_BUILD_OBJECT('id', category.id, 'name', category.name)) as categories"
+        )
+      )
+      .join("blog_category", "blog.id", "blog_category.blog_id")
+      .join("category", "category.id", "blog_category.category_id")
+      .join("user", "blog.author_id", "public.user.id")
+      .groupBy("blog.id", "public.user.id")
+      .where("blog.id", blogId);
+    return query;
+  }
 }
 
 module.exports = Blog;

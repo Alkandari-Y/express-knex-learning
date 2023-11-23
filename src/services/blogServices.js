@@ -22,6 +22,11 @@ class BlogService {
     return blog;
   }
 
+  static async getBlogDetails(blogId) {
+    const blog = await Blog.findBlogSelectDetails(blogId);
+    return blog;
+  }
+
   static async updateBlog(searchParams, data) {
     if (data.hasOwnProperty("published")) {
       if (data.published && !data.published_at) {

@@ -1,3 +1,4 @@
+const { StatusCodes } = require("http-status-codes");
 const jwt = require("jsonwebtoken");
 const User = require("../../models/User");
 const { JWT_SECRET } = require("../../config").jwt;
@@ -14,14 +15,14 @@ module.exports = async (req, res, next) => {
     return jwt.verify(encodedToken, JWT_SECRET, async (err, token) => {
       // using this method to specify the status on the error and be more explicit when handling decoding
       if (err) {
-        err.status = 403;
+        err.status = StatusCodes.UNAUTHORIZED;
         return next(err);
       }
 
       const user = await User.findOne({ by: token.id });
       if (!user) {
         return next({
-          status: 403,
+          status: StatusCodes.UNAUTHORIZED,
           message: "Invalid token",
           details: ["invalid user"],
         });
