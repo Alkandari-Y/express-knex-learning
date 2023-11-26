@@ -37,7 +37,7 @@ class Blog extends BaseModel {
             JSON_AGG(
                 JSON_BUILD_OBJECT('id', public.comment.id, 'text', public.comment.text, 'user_id', public.comment.user_id)
             ) FILTER (WHERE public.comment.id IS NOT NULL),
-            '[]'::json
+            'null'::json
         ) as comments`
         )
       )
