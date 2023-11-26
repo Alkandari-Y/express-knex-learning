@@ -32,7 +32,13 @@ class Blog extends BaseModel {
       .select(
         "blog.*",
         this._db.raw(
-          "JSON_AGG(JSON_BUILD_OBJECT('id', comment.id, 'text', comment.text, 'user', comment.user_id, 'created_at', comment.created_at)) as comments"
+          // "JSON_AGG(JSON_BUILD_OBJECT('id', comment.id, 'text', comment.text, 'user', comment.user_id, 'created_at', comment.created_at)) as comments"
+          `COALESCE(
+            JSON_AGG(
+                JSON_BUILD_OBJECT('id', public.comment.id, 'text', public.comment.text, 'user_id', public.comment.user_id)
+            ) FILTER (WHERE public.comment.id IS NOT NULL),
+            '[]'::json
+        ) as comments`
         )
       )
       .leftJoin("comment", "blog.id", "comment.blog_id")
@@ -50,9 +56,18 @@ class Blog extends BaseModel {
         ),
         this._db.raw(
           "JSON_AGG(JSON_BUILD_OBJECT('id', category.id, 'name', category.name)) as categories"
+        ),
+        this._db.raw(
+          `COALESCE(
+            JSON_AGG(
+                JSON_BUILD_OBJECT('id', public.comment.id, 'text', public.comment.text, 'user_id', public.comment.user_id)
+            ) FILTER (WHERE public.comment.id IS NOT NULL),
+            '[]'::json
+        ) as comments`
         )
       )
       .join("blog_category", "blog.id", "blog_category.blog_id")
+      .leftJoin("comment", "comment.blog_id", "blog.id")
       .join("category", "category.id", "blog_category.category_id")
       .join("user", "blog.author_id", "public.user.id")
       .groupBy("blog.id", "public.user.id")
