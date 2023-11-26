@@ -25,7 +25,7 @@ exports.registerUserSession = async (req, res, next) => {
   try {
     const user = await UserService.createUser(req.body);
     req.session.authenticated = true;
-    req.session.user = user;
+    req.session.user = {id: user.id, username: user.username, email: user.email};
 
     res.sendStatus(StatusCodes.CREATED);
   } catch (error) {
@@ -37,7 +37,7 @@ exports.loginUserSession = async (req, res, next) => {
   try {
     const user = await UserService.loginUser(req.body);
     req.session.authenticated = true;
-    req.session.user = user;
+    req.session.user = {id: user.id, username: user.username, email: user.email};
 
     res.sendStatus(StatusCodes.OK);
   } catch (error) {
