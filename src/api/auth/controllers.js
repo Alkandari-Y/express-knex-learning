@@ -44,3 +44,13 @@ exports.loginUserSession = async (req, res, next) => {
     return next(error);
   }
 };
+
+exports.logOutSession = async (req, res , next) => {
+  try {
+    res.clearCookie('connect.sid', { path: '/' });
+    req.session.destroy();
+    return res.sendStatus(200)
+  } catch (error) {
+    return next(error);
+  }
+}
