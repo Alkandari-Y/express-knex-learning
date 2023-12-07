@@ -1,3 +1,6 @@
+// Not really implemented in the project
+// can modify/create middleware to check for auth User using both
+// sessions or jwt
 const { StatusCodes } = require("http-status-codes");
 const jwt = require("jsonwebtoken");
 const User = require("../../models/User");
@@ -19,7 +22,7 @@ module.exports = async (req, res, next) => {
         return next(err);
       }
 
-      const user = await User.findOne({ by: token.id });
+      const user = await User.findOne({ id: token.id });
       if (!user) {
         return next({
           status: StatusCodes.UNAUTHORIZED,
