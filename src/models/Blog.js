@@ -35,7 +35,7 @@ class Blog extends BaseModel {
           // "JSON_AGG(JSON_BUILD_OBJECT('id', comment.id, 'text', comment.text, 'user', comment.user_id, 'created_at', comment.created_at)) as comments"
           `COALESCE(
             JSON_AGG(
-                JSON_BUILD_OBJECT('id', public.comment.id, 'text', public.comment.text, 'user_id', public.comment.user_id)
+                JSON_BUILD_OBJECT('id', public.comment.id, 'text', public.comment.text, 'user_id', public.comment.user_id, public.user.username, 'username')
             ) FILTER (WHERE public.comment.id IS NOT NULL),
             'null'::json
         ) as comments`
@@ -60,7 +60,7 @@ class Blog extends BaseModel {
         this._db.raw(
           `COALESCE(
             JSON_AGG(
-                JSON_BUILD_OBJECT('id', public.comment.id, 'text', public.comment.text, 'user_id', public.comment.user_id)
+                JSON_BUILD_OBJECT('id', public.comment.id, 'text', public.comment.text, 'user_id', public.comment.user_id, public.user.username, 'username')
             ) FILTER (WHERE public.comment.id IS NOT NULL),
             'null'::json
         ) as comments`
