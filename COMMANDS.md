@@ -1,3 +1,5 @@
+Install Docker Desktop
+
 Docker Commands:
 
 - Download and run redis container
