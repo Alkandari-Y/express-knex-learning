@@ -10,13 +10,43 @@
 			"name": "Auth",
 			"item": [
 				{
+					"name": "Register - JWT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"test\",\r\n    \"password\": \"P@ssw0rd\",\r\n    \"email\": \"test@mail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/auth/register/jwt",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"register",
+								"jwt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Login - JWT",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"shereen\",\r\n    \"password\": \"P@ssw0rd\"\r\n}",
+							"raw": "{\r\n    \"username\": \"testuser1\",\r\n    \"password\": \"P@ssw0rd\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -34,36 +64,6 @@
 								"auth",
 								"login",
 								"jwt"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Login - Session",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"testuser2\",\r\n    \"password\": \"P@ssw0rd\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8000/api/auth/login/session",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"auth",
-								"login",
-								"session"
 							]
 						}
 					},
@@ -100,13 +100,13 @@
 					"response": []
 				},
 				{
-					"name": "Register - JWT",
+					"name": "Login - Session",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"test\",\r\n    \"password\": \"P@ssw0rd\",\r\n    \"email\": \"test@mail.com\"\r\n}",
+							"raw": "{\r\n    \"username\": \"testuser1\",\r\n    \"password\": \"P@ssw0rd\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -114,7 +114,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/auth/register/jwt",
+							"raw": "localhost:8000/api/auth/login/session",
 							"host": [
 								"localhost"
 							],
@@ -122,8 +122,38 @@
 							"path": [
 								"api",
 								"auth",
-								"register",
-								"jwt"
+								"login",
+								"session"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout- Session",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/auth/logout/session",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"logout",
+								"session"
 							]
 						}
 					},
@@ -295,7 +325,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/blogs/detail/2",
+							"raw": "localhost:8000/api/blogs/detail/4",
 							"host": [
 								"localhost"
 							],
@@ -304,7 +334,7 @@
 								"api",
 								"blogs",
 								"detail",
-								"2"
+								"4"
 							]
 						}
 					},

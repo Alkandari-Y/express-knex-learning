@@ -30,7 +30,7 @@ class UserService {
     return { access, refresh };
   }
 
-  static async loginUser(data) {
+  static async authenticate(data) {
     const { username, password } = data;
 
     const foundUser = await User.findOne({ username });
