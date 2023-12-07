@@ -58,7 +58,7 @@ class Blog extends BaseModel {
         ),
         this._db.raw(
           `COALESCE(
-            JSON_AGG(JSON_BUILD_OBJECT('id', category.id, 'name', category.name)) FILTER (WHERE public.comment.id IS NOT NULL),
+            JSON_AGG(JSON_BUILD_OBJECT('id', category.id, 'name', category.name)) FILTER (WHERE public.category.id IS NOT NULL),
             'null'::json
           ) as categories`
         ),
