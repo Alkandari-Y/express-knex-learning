@@ -32,13 +32,15 @@ class Blog extends BaseModel {
       .select(
         "blog.*",
         this._db.raw(
-          // "JSON_AGG(JSON_BUILD_OBJECT('id', comment.id, 'text', comment.text, 'user', comment.user_id, 'created_at', comment.created_at)) as comments"
-          `COALESCE(
-            JSON_AGG(
-                JSON_BUILD_OBJECT('id', public.comment.id, 'text', public.comment.text, 'user_id', public.comment.user_id, public.user.username, 'username')
-            ) FILTER (WHERE public.comment.id IS NOT NULL),
-            'null'::json
-        ) as comments`
+          `(SELECT COALESCE(
+                JSON_AGG(
+                    JSON_BUILD_OBJECT('id', public.comment.id, 'text', public.comment.text, 'user_id', public.comment.user_id,  'username', public.user.username)
+                ) FILTER (WHERE public.comment.id IS NOT NULL),
+                'null'::json
+            ) FROM comment
+            LEFT JOIN public.user ON comment.user_id = public.user.id
+            WHERE comment.blog_id = blog.id
+            ) as comments`
         )
       )
       .leftJoin("comment", "blog.id", "comment.blog_id")
@@ -55,23 +57,30 @@ class Blog extends BaseModel {
           "JSON_BUILD_OBJECT('id', public.user.id, 'username', public.user.username) as author"
         ),
         this._db.raw(
-          "JSON_AGG(JSON_BUILD_OBJECT('id', category.id, 'name', category.name)) as categories"
+          `COALESCE(
+            JSON_AGG(JSON_BUILD_OBJECT('id', category.id, 'name', category.name)) FILTER (WHERE public.comment.id IS NOT NULL),
+            'null'::json
+          ) as categories`
         ),
         this._db.raw(
-          `COALESCE(
-            JSON_AGG(
-                JSON_BUILD_OBJECT('id', public.comment.id, 'text', public.comment.text, 'user_id', public.comment.user_id, public.user.username, 'username')
-            ) FILTER (WHERE public.comment.id IS NOT NULL),
-            'null'::json
-        ) as comments`
+          `(SELECT COALESCE(
+                JSON_AGG(
+                    JSON_BUILD_OBJECT('id', public.comment.id, 'text', public.comment.text, 'user_id', public.comment.user_id,  'username', public.user.username)
+                ) FILTER (WHERE public.comment.id IS NOT NULL),
+                'null'::json
+            ) FROM comment
+            LEFT JOIN public.user ON comment.user_id = public.user.id
+            WHERE comment.blog_id = blog.id
+            ) as comments`
         )
       )
-      .join("blog_category", "blog.id", "blog_category.blog_id")
+      .leftJoin("blog_category", "blog.id", "blog_category.blog_id")
       .leftJoin("comment", "comment.blog_id", "blog.id")
-      .join("category", "category.id", "blog_category.category_id")
-      .join("user", "blog.author_id", "public.user.id")
+      .leftJoin("category", "category.id", "blog_category.category_id")
+      .leftJoin("user", "blog.author_id", "public.user.id")
       .groupBy("blog.id", "public.user.id")
-      .where("blog.id", blogId);
+      .where("blog.id", blogId)
+      .first();
     return query;
   }
 }
