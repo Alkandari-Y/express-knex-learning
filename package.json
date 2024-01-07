@@ -4,8 +4,8 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
+    "start": "node src",
+    "dev": "nodemon src",
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate:make": "npx knex migrate:make",
     "migrate:latest": "npx knex migrate:latest",
