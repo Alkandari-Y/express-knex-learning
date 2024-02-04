@@ -15,7 +15,7 @@ class UserService {
     }
 
     const hashedPassword = await bcryptHashPassword(password);
-    const user = await User.create({
+    const [user] = await User.create({
       username,
       email,
       password: hashedPassword,
@@ -30,7 +30,7 @@ class UserService {
     return { access, refresh };
   }
 
-  static async loginUser(data) {
+  static async authenticate(data) {
     const { username, password } = data;
 
     const foundUser = await User.findOne({ username });
@@ -42,7 +42,6 @@ class UserService {
     if (!match) {
       throw new ValidationError("Invalid credentials");
     }
-
     return foundUser;
   }
 }

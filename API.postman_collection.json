@@ -10,96 +10,6 @@
 			"name": "Auth",
 			"item": [
 				{
-					"name": "Login - JWT",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"shereen\",\r\n    \"password\": \"P@ssw0rd\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8000/api/auth/login/jwt",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"auth",
-								"login",
-								"jwt"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Login - Session",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"shereen\",\r\n    \"password\": \"P@ssw0rd\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8000/api/auth/login/session",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"auth",
-								"login",
-								"session"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Register - Session",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"testuse2\",\r\n    \"password\": \"P@ssw0rd\",\r\n    \"email\": \"testuse2@mail.com\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8000/api/auth/register/session",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"auth",
-								"register",
-								"session"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Register - JWT",
 					"request": {
 						"method": "POST",
@@ -124,6 +34,126 @@
 								"auth",
 								"register",
 								"jwt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login - JWT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"testuser1\",\r\n    \"password\": \"P@ssw0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/auth/login/jwt",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login",
+								"jwt"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register - Session",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"testuser11\",\r\n    \"password\": \"P@ssw0rd\",\r\n    \"email\": \"testuser11@mail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/auth/register/session",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"register",
+								"session"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login - Session",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"testuser1\",\r\n    \"password\": \"P@ssw0rd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/auth/login/session",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login",
+								"session"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout- Session",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/auth/logout/session",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"logout",
+								"session"
 							]
 						}
 					},
@@ -218,13 +248,45 @@
 					"response": []
 				},
 				{
+					"name": "My Blogs",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"SECTION 1\",\r\n    \"content\": \"knex update works and returns\",\r\n    \"published\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/blogs/my-blogs",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"blogs",
+								"my-blogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Create Blog",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Test\",\r\n    \"content\": \"knex update works and returns\",\r\n    \"published\": 0\r\n}",
+							"raw": "{\r\n    \"title\": \"Manifesto\",\r\n    \"content\": \"refactoring sucks\",\r\n    \"published\": 0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -263,7 +325,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/blogs/9",
+							"raw": "localhost:8000/api/blogs/detail/4",
 							"host": [
 								"localhost"
 							],
@@ -271,39 +333,8 @@
 							"path": [
 								"api",
 								"blogs",
-								"9"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "My Blogs",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"SECTION 1\",\r\n    \"content\": \"knex update works and returns\",\r\n    \"published\": 0\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8000/api/blogs/my-blogs",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"blogs",
-								"my-blogs"
+								"detail",
+								"4"
 							]
 						}
 					},
@@ -316,7 +347,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"published\": 1\r\n}",
+							"raw": "{\r\n    \"published\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -324,7 +355,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/blogs/4",
+							"raw": "localhost:8000/api/blogs/detail/10",
 							"host": [
 								"localhost"
 							],
@@ -332,7 +363,8 @@
 							"path": [
 								"api",
 								"blogs",
-								"4"
+								"detail",
+								"10"
 							]
 						}
 					},
@@ -353,7 +385,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/blogs/4",
+							"raw": "localhost:8000/api/blogs/detail/4",
 							"host": [
 								"localhost"
 							],
@@ -361,7 +393,72 @@
 							"path": [
 								"api",
 								"blogs",
+								"detail",
 								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Comment on Blog",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"fixed routes\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/blogs/detail/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"blogs",
+								"detail",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Comments By Blog",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"SECTION 1\",\r\n    \"content\": \"knex update works and returns\",\r\n    \"published\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/blogs/detail/2/comments",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"blogs",
+								"detail",
+								"2",
+								"comments"
 							]
 						}
 					},

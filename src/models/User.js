@@ -1,10 +1,10 @@
 const BaseModel = require("./base");
 
 class User extends BaseModel {
-  static tableName = "users";
+  static tableName = "user";
 
-  static async findExistingUser(username, email) {
-    const user = await this.table
+  static findExistingUser(username, email) {
+    const user = this.table
     .where({ username })
       .orWhere({ email }).first();
     return user;

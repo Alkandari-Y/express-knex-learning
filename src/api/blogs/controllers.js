@@ -1,10 +1,12 @@
+const { StatusCodes } = require("http-status-codes");
 const BlogService = require("../../services/blogServices");
+const CommentService = require("../../services/commentService");
 
 exports.blogIdParamHandler = async (req, res, next, blogId) => {
   const foundBlog = await BlogService.getBlog({ id: blogId });
   if (!foundBlog) {
     return res
-      .status(404)
+      .status(StatusCodes.NOT_FOUND)
       .json({ message: `Blog with id ${blogId} does not exist` });
   }
 
@@ -27,7 +29,7 @@ exports.createBlog = async (req, res, next) => {
       ...req.body,
       author_id: req.session.user.id,
     });
-    return res.status(201).json(newBLog);
+    return res.status(StatusCodes.CREATED).json(newBLog);
   } catch (error) {
     return next(error);
   }
@@ -35,8 +37,10 @@ exports.createBlog = async (req, res, next) => {
 
 exports.getBlogById = async (req, res, next) => {
   try {
-    return res.json(req.blog);
+    const blog = await BlogService.getBlogDetails(req.blog.id);
+    return res.json(blog);
   } catch (error) {
+    console.log(error);
     return next(error);
   }
 };
@@ -49,7 +53,7 @@ exports.updateBlogById = async (req, res, next) => {
       },
       req.body
     );
-    return res.status(202).json(updatedBlog);
+    return res.status(StatusCodes.ACCEPTED).json(updatedBlog);
   } catch (error) {
     return next(error);
   }
@@ -58,7 +62,7 @@ exports.updateBlogById = async (req, res, next) => {
 exports.deleteBlogById = async (req, res, next) => {
   try {
     await BlogService.deleteBlog({ id: req.blog.id });
-    return res.sendStatus(204);
+    return res.sendStatus(StatusCodes.NO_CONTENT);
   } catch (error) {
     return next(error);
   }
@@ -76,8 +80,34 @@ exports.getBlogsByCurrentUser = async (req, res, next) => {
 exports.getAllAuthors = async (req, res, next) => {
   try {
     const authors = await BlogService.getAllAuthors();
-    return res.json(authors)
+    return res.json(authors);
   } catch (error) {
     return next(error);
   }
-} 
+};
+
+exports.postComment = async (req, res, next) => {
+  try {
+    const { id: blog_id } = req.blog;
+    const { id: user_id } = req.session.user;
+    const comment = await CommentService.postComment({
+      ...req.body,
+      user_id,
+      blog_id,
+    });
+    return res.status(StatusCodes.CREATED).json(comment);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+exports.getAllCommentsByBlog = async (req, res, next) => {
+  try {
+    const comments = await CommentService.findCommentsByBlog({
+      blog_id: req.blog.id,
+    });
+    return res.json(comments);
+  } catch (error) {
+    return next(error);
+  }
+};
